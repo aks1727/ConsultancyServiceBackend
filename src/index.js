@@ -19,7 +19,6 @@ connectDb()
     .then(() => {
         const server = createServer(app)
         const io = new Server(server, {
-            pingTimeout: 60000, // to close the connection
             cors: {
                 origin: [
                     "https://nexadev-consultancy-service.vercel.app",
