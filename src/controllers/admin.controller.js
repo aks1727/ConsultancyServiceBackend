@@ -59,7 +59,7 @@ const loginAdmin = asyncHandler(async (req, res) => {
     if (!username || !password) {
         throw new ApiError(404, "Missing Credentials");
     }
-    const admin = await Admin.findOne({ username });
+    const admin = await Admin.findOne({ username }).select('+password');
     if (!admin) {
         throw new ApiError(404, `${username} is not registered`);
     }

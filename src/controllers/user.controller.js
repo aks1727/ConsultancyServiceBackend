@@ -88,6 +88,10 @@ const loginUser = asyncHandler(async (req, res) => {
     if (!user) {
         throw new ApiError(404, "User not Found");
     }
+    const isPass = await user.isPasswordCorrect(user.password)
+    if (!isPass) {
+        throw new ApiError(400, "Passwords do not match");
+    }
     const finalUser = await User.findById(user._id).select(
         "-password -refreshToken"
     );
