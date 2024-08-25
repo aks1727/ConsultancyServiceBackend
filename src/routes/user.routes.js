@@ -9,7 +9,7 @@ const router = Router()
 router.route('/register').post(user.registerUser)
 router.route('/login').post(user.loginUser)
 router.route('/logout').post(verifyJWT,user.logoutUser)
-router.route('/changePassword').post(verifyJWT,user.changeUserPassword)
+router.route('/changePassword').post(user.changeUserPassword)
 router.route('/currentUser').get(verifyJWT,user.getCurrentUser)
 
 

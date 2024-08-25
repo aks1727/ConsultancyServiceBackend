@@ -88,7 +88,7 @@ const loginUser = asyncHandler(async (req, res) => {
     if (!user) {
         throw new ApiError(404, "User not Found");
     }
-    const isPass = await user.isPasswordCorrect(user.password)
+    const isPass = await user.isPasswordCorrect(password)
     if (!isPass) {
         throw new ApiError(400, "Passwords do not match");
     }
@@ -124,19 +124,19 @@ const logoutUser = asyncHandler(async (req, res) => {
 });
 
 const changeUserPassword = asyncHandler(async (req, res) => {
-    const { oldPassword, newPassword, confirmPassword } = req.data;
-    if (!oldPassword || !newPassword || !confirmPassword) {
+    const { email, newPassword, confirmPassword } = req.body;
+    if (!email || !newPassword || !confirmPassword) {
         throw new ApiError(404, "Missing Credentials");
     }
     if (newPassword !== confirmPassword) {
         throw new ApiError(406, "password didn't matched");
     }
-    const user = await User.findById(req.user._id);
-    const isCorrect = await user.isPasswordCorrect(oldPassword);
-
-    if (!isCorrect) {
-        throw new ApiError(401, "Password Incorrect");
+    const user = await User.findOne({ email });
+    
+    if (!user) {
+        throw new ApiError(404,"User not found with the email id check information correctly");
     }
+
     user.password = newPassword;
     user.save({ validateBeforeSave: false });
 
