@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 })
 
 app.use(cors({
-    origin: ['https://nexadev-consultancy-service.vercel.app', 'http://localhost:5173'],
+    origin: ['https://consultancy-service-platform.vercel.app/', 'http://localhost:5173'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
