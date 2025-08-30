@@ -22,7 +22,7 @@ connectDb()
             pingTimeout: 60000, // to close the connection
             cors: {
                 origin: [
-                    "https://nexadev-consultancy-service.vercel.app",
+                    "https://consultancy-service-platform.vercel.app/",
                     "http://localhost:5173",
                 ],
                 methods: ["GET", "POST", "PUT", "DELETE"],
